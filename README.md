@@ -294,6 +294,40 @@ export DEVMATE_CONFIG_PATH=/absolute/path/to/config.toml
 
 ## 7. 快速开始
 
+### Docker 启动
+
+```bash
+docker compose build --no-cache
+docker compose up
+```
+项目提供了：
+
+- `Dockerfile`
+- `docker-compose.yml`
+
+#### 一键启动
+
+```bash
+docker compose up --build
+```
+
+默认会启动两个服务：
+
+- `search-mcp`
+  - MCP 搜索服务
+  - 端口 `8001`
+
+- `app`
+  - Web UI
+  - 端口 `8080`
+
+启动后访问：
+
+```text
+http://localhost:8080
+```
+---
+
 ### 7.1 构建本地知识库
 
 先把 `docs/` 中的 markdown / txt 文档摄入向量库：
@@ -781,38 +815,7 @@ workspace/data/uploads/web/
 
 ---
 
-## 13. Docker 启动
-
-项目提供了：
-
-- `Dockerfile`
-- `docker-compose.yml`
-
-### 13.1 一键启动
-
-```bash
-docker compose up --build
-```
-
-默认会启动两个服务：
-
-- `search-mcp`
-  - MCP 搜索服务
-  - 端口 `8001`
-
-- `app`
-  - Web UI
-  - 端口 `8080`
-
-启动后访问：
-
-```text
-http://localhost:8080
-```
-
----
-
-## 14. 常用命令速查
+## 13. 常用命令速查
 
 ### 安装与检查
 
@@ -846,7 +849,7 @@ uv run devmate list-skills
 
 ---
 
-## 15. 开发与测试
+## 14. 开发与测试
 
 项目当前已包含测试，覆盖了若干关键行为，例如：
 
@@ -868,7 +871,7 @@ uv run pytest
 
 ---
 
-## 16. 常见使用建议
+## 15. 常见使用建议
 
 1. **先 ingest，再跑任务**
    - 如果你依赖本地规范或模板，先执行 `devmate ingest`
@@ -887,7 +890,7 @@ uv run pytest
 
 ---
 
-## 17. 适合的典型任务
+## 16. 适合的典型任务
 
 - 生成一个新的 Python / FastAPI / 前端项目
 - 在现有工作区上做增量修改
@@ -898,6 +901,6 @@ uv run pytest
 
 ---
 
-## 18. 一句话总结
+## 17. 一句话总结
 
 如果你希望把“搜索资料、读取本地文档、生成代码、验证、打包、沉淀技能”串成一条完整的开发执行链，DevMate 就是这个仓库当前实现的核心能力集合。
