@@ -1,0 +1,48 @@
+[project]
+name = "devmate"
+version = "0.1.0"
+description = "DevMate - an AI coding assistant with Deep Agents, MCP web search, RAG, and reusable skills"
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+  "deepagents",
+  "fastapi>=0.115.0",
+  "langchain>=1.2.10",
+  "langchain-chroma",
+  "langchain-mcp-adapters>=0.2.2",
+  "langchain-openai>=1.1.11",
+  "langchain-text-splitters",
+  "langsmith>=0.3.45",
+  "mcp[cli]>=1.19.0",
+  "tavily-python>=0.7.12",
+  "typer>=0.16.0",
+  "uvicorn[standard]>=0.35.0",
+  "langchain-deepseek",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3.0",
+  "pytest-asyncio>=1.1.0",
+  "ruff>=0.12.0"
+]
+
+[project.scripts]
+devmate = "devmate.cli:app"
+
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/devmate"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"

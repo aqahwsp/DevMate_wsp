@@ -1,0 +1,57 @@
+# DevMate 配置文件
+
+[model]
+provider = "deepseek"
+ai_base_url = "https://api.deepseek.com"
+api_key = "key"
+model_name = "deepseek-chat"
+temperature = 0.0
+max_tokens = 4096
+timeout_seconds = 120
+embedding_provider = "hash"
+embedding_model_name = "unused"
+
+
+[search]
+tavily_api_key = "key"
+mcp_url = "http://search-mcp:8001/mcp"
+max_results = 5
+allow_mock_search = false
+
+[langsmith]
+enabled = true
+langchain_tracing_v2 = true
+langchain_api_key = "key"
+langsmith_api_key = "key"
+project = "devmate"
+endpoint = "https://api.smith.langchain.com"
+
+[skills]
+skills_dir = ".skills"
+auto_save_on_success = true
+
+[rag]
+docs_dir = "docs"
+persist_dir = "data/chroma"
+collection_name = "devmate-knowledge"
+top_k = 4
+chunk_size = 1200
+chunk_overlap = 150
+
+[app]
+workspace_dir = "workspace"
+host = "0.0.0.0"
+port = 8080
+log_level = "INFO"
+
+[mcp]
+host = "0.0.0.0"
+port = 8001
+streamable_http_path = "/mcp"
+
+[workflow]
+artifacts_dir = "data/workflow_runs"
+deep_optimization_default = false
+local_python_tool_default = false
+max_deep_optimization_rounds = 2
+standard_builder_repair_rounds = 1

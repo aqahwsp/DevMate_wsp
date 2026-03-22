@@ -1,0 +1,44 @@
+services:
+  search-mcp:
+    build:
+      context: .
+    command: ["devmate", "mcp-search", "--host", "0.0.0.0", "--port", "8001"]
+    environment:
+      DEVMATE_CONFIG_PATH: /app/config.toml
+    volumes:
+      - ./src:/app/src
+      - ./config.toml:/app/config.toml:ro
+      - ./.skills:/app/.skills
+      - ./docs:/app/docs
+      - ./workspace:/app/workspace
+      - ./data:/app/data
+    ports:
+      - "8001:8001"
+    restart: unless-stopped
+    healthcheck:
+      test:
+        ["CMD-SHELL", "curl -fsS http://127.0.0.1:8001/healthz >/dev/null || exit 1"]
+      interval: 5s
+      timeout: 3s
+      start_period: 10s
+      retries: 10
+
+  app:
+    build:
+      context: .
+    command: ["devmate", "web", "--host", "0.0.0.0", "--port", "8080"]
+    environment:
+      DEVMATE_CONFIG_PATH: /app/config.toml
+    depends_on:
+      search-mcp:
+        condition: service_healthy
+    volumes:
+      - ./src:/app/src
+      - ./config.toml:/app/config.toml:ro
+      - ./.skills:/app/.skills
+      - ./docs:/app/docs
+      - ./workspace:/app/workspace
+      - ./data:/app/data
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
